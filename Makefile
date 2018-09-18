@@ -25,7 +25,7 @@ cleantmp:
 	@echo "Cleaning .o files"
 	rm -rf $(SRC)/*.o
 
-compile: $(SRC)/os/unix/mx_alloc.o $(SRC)/linkedlist.o $(SRC)/main.o
+compile: $(SRC)/helpers.o $(SRC)/os/unix/mx_alloc.o $(SRC)/linkedlist.o $(SRC)/main.o
 	gcc -o $(DIST)/$(LINKEDLIST_EXECUTABLE) $?
 	# $(MAKE) cleantmp
 
