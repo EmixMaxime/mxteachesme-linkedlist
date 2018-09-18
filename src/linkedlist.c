@@ -17,6 +17,21 @@ Node *linkedlist_create_node(int data)
 	return new;
 }
 
+List *linkedlist_init()
+{
+	List *list;
+	Node *node;
+
+	list 	= mx_malloc(sizeof(*list));
+	node = mx_malloc(sizeof(*node));
+
+	node->data = 0;
+	node->next = NULL;
+	list->head = node;
+
+	return list;
+}
+
 void linkedlist_insert_head(List *list, Node *el)
 {
 	if (list->head == NULL) {
@@ -69,21 +84,6 @@ Node *linkedlist_get_tail(List *list)
 	}
 
 	return node;
-}
-
-List *linkedlist_init()
-{
-	List *list;
-	Node *element;
-
-	list 	= mx_malloc(sizeof(*list));
-	element = mx_malloc(sizeof(*element));
-
-	element->data = 0;
-	element->next = NULL;
-	list->head = element;
-
-	return list;
 }
 
 /**
