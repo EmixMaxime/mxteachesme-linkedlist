@@ -19,8 +19,14 @@ Node *linkedlist_create_node(int data)
 
 void linkedlist_insert_head(List *list, Node *el)
 {
-	el->next = list->head;
-	list->head = el;
+	if (list->head == NULL) {
+		list->head = el;
+	}
+	else {
+		el->next = list->head;
+		list->head = el;
+
+	}
 }
 
 void linkedlist_insert_tail(List *list, Node *el)
