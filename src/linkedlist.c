@@ -34,7 +34,13 @@ void linkedlist_insert_tail(List *list, Node *el)
 	Node *last;
 
 	last = linkedlist_get_tail(list);
-	last->next = el;
+
+	if (last == NULL) {
+		list->head = el;
+	}
+	else {
+		last->next = el;
+	}
 }
 
 void linkedlist_print(List *list)
