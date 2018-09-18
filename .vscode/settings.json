@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "mx_alloc.h": "c",
+        "linkedlist.h": "c",
+        "stdbool.h": "c"
+    }
+}
