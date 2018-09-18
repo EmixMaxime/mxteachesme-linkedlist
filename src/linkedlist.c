@@ -27,7 +27,9 @@ List *linkedlist_init()
 
 	node->data = 0;
 	node->next = NULL;
+
 	list->head = node;
+	list->tail = node;
 
 	return list;
 }
@@ -40,22 +42,13 @@ void linkedlist_insert_head(List *list, Node *el)
 	else {
 		el->next = list->head;
 		list->head = el;
-
 	}
 }
 
 void linkedlist_insert_tail(List *list, Node *el)
 {
-	Node *last;
-
-	last = linkedlist_get_tail(list);
-
-	if (last == NULL) {
-		list->head = el;
-	}
-	else {
-		last->next = el;
-	}
+	list->tail->next = el;
+	list->tail = el;
 }
 
 void linkedlist_print(List *list)
@@ -72,20 +65,6 @@ void linkedlist_print(List *list)
 	printf("NULL\n");
 }
 
-Node *linkedlist_get_tail(List *list)
-{
-	Node *node;
-
-	node = list->head;
-
-	while (node->next != NULL)
-	{
-		node = node->next;
-	}
-
-	return node;
-}
-
 /**
  * Je parcours la liste jusqu'à ce que
  * la valeur est > à data
@@ -98,9 +77,7 @@ void linkedlist_sorted_insert(List *list, Node *el)
 	Node *current_node;
 	Node *previous_element;
 	Node *new;
-	int data;
 
-	data = el->data;
 	current_node = list->head;
 	previous_element = current_node;
 
@@ -109,7 +86,7 @@ void linkedlist_sorted_insert(List *list, Node *el)
 
 	while (current_node != NULL && find == 0)
 	{
-		if (data < current_node->data)
+		if (el->data < current_node->data)
 		{
 			find = 1;
 		}
@@ -121,16 +98,21 @@ void linkedlist_sorted_insert(List *list, Node *el)
 		}
 	}
 
-	new = linkedlist_create_node(data);
-
 	if (n == 0)
 	{
-		linkedlist_insert_head(list, new);
-		return;
+		printf("insert head %d\n", el->data);
+		linkedlist_insert_head(list, el);
+	}
+	else if (previous_element == list->tail) {
+		printf("insert tail %d\n", el->data);
+		linkedlist_insert_tail(list, el);
+	}
+	else {
+		printf("insert normally %d\n", el->data);
+		el->next = current_node;
+		previous_element->next = el;
 	}
 
-	new->next = current_node;
-	previous_element->next = new;
 }
 
 bool linkedlist_is_sorted(List *list)

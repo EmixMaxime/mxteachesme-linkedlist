@@ -12,6 +12,7 @@ typedef struct List List;
 struct List
 {
 	Node *head;
+	Node *tail;
 };
 
 /**
